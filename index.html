@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Microtk by thenderson21</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Microtk</h1>
+        <p>A tiny javascript library</p>
+
+        <p class="view"><a href="https://github.com/thenderson21/microTK">View the Project on GitHub <small>thenderson21/microTK</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/thenderson21/microTK/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/thenderson21/microTK/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/thenderson21/microTK">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="global" class="anchor" href="#global" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Global</h1>
+
+<hr>
+
+<h3>
+<a id="addattributename-value" class="anchor" href="#addattributename-value" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addAttribute(name, value)</h3>
+
+<p>Adds an attribute to the selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>name</strong>: <code>string</code>, The attribute to be added.</p>
+
+<p><strong>value</strong>: <code>string</code>, The value of the attribute.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="addclassclassname" class="anchor" href="#addclassclassname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addClass(className)</h3>
+
+<p>Adds a class to the selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>className</strong>: <code>string</code>, The class to be added.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="addeventevent-action" class="anchor" href="#addeventevent-action" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addEvent(event, action)</h3>
+
+<p>Adds an event to the selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>event</strong>: <code>string</code>, Event to be added.</p>
+
+<p><strong>action</strong>: <code>function</code>, Function to be run on event.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="appendelement" class="anchor" href="#appendelement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>append(element)</h3>
+
+<p>Appends an HTMLElement into the selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>element</strong>: <code>HTMLElement</code>, Element to be removed.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="eachaction" class="anchor" href="#eachaction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>each(action)</h3>
+
+<p>Performs an action on the selected elements</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>action</strong>: <code>elementAction</code>, Function to be run when the element has providec class.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="hasattributename-action" class="anchor" href="#hasattributename-action" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>hasAttribute(name, action)</h3>
+
+<p>Checks to see if elements contains provided class and performs provided action.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>name</strong>: <code>string</code>, The attribute to be added.</p>
+
+<p><strong>action</strong>: <code>elementAction</code>, Function to be run when the element has provided attribute.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="hasclassclassname-action" class="anchor" href="#hasclassclassname-action" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>hasClass(className, action)</h3>
+
+<p>Checks to see ff elements contains provided class and performs provided action.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>className</strong>: <code>string</code>, Element to be tested for.</p>
+
+<p><strong>action</strong>: <code>elementAction</code>, Function to be run when the element has providec class.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="mergeobject-callback" class="anchor" href="#mergeobject-callback" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>merge(object, callback)</h3>
+
+<p>Recursivly merges objects.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>object</strong>: <code>Object</code>, The destination object.</p>
+
+<ul>
+<li>
+<strong>sourse...</strong>: <code>Object</code>, The sourse objects.</li>
+</ul>
+
+<p><strong>callback</strong>: <code>errorOnlyCallback</code>, Passes an error if one occures.</p>
+
+<p><strong>Returns</strong>: <code>Object</code>, Returns the merged destination object.</p>
+
+<h3>
+<a id="prependelement" class="anchor" href="#prependelement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>prepend(element)</h3>
+
+<p>Prepends an HTMLElement into the selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>element</strong>: <code>HTMLElement</code>, Element to be removed.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="remove" class="anchor" href="#remove" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>remove()</h3>
+
+<p>Removes the selected elements from the DOM.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="removeattributename" class="anchor" href="#removeattributename" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>removeAttribute(name)</h3>
+
+<p>Removes an attribute from the selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>name</strong>: <code>string</code>, The attribute to be added.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="removeclassclassname" class="anchor" href="#removeclassclassname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>removeClass(className)</h3>
+
+<p>Removes a class from the selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>className</strong>: <code>string</code>, Class to be removed.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="removeid" class="anchor" href="#removeid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>removeId()</h3>
+
+<p>Removes the id from the selected elements.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<h3>
+<a id="toggleclassclassname" class="anchor" href="#toggleclassclassname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>toggleClass(className)</h3>
+
+<p>Toggles a class in selected elements.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p><strong>className</strong>: <code>string</code>, Class to be toggled.</p>
+
+<p><strong>Returns</strong>: <code>microTK</code>, A copy of the microTK object.</p>
+
+<hr>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/thenderson21">thenderson21</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
