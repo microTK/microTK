@@ -104,7 +104,7 @@
      *
      * @param {string} name - The attribute to be added.
      * @param {string} value - The value of the attribute.
-     * @returns {microTK} A copy of the microTK object.
+     * @returns {MicroTK} A copy of the microTK object.
      * @public
      */
 
@@ -278,43 +278,6 @@
 
 
     /**
-     * Recursivly merges objects.
-     *
-     * @param {Object} object - The destination object.
-     * @param {Object} [sourse...] - The sourse objects.
-     * @param {errorOnlyCallback} [callback] - Passes an error if one occures. 
-     * @returns {Object} Returns the merged destination object.
-     * @public
-     */
-
-    MicroTK.merge = function() {
-      var i, object, source, sources;
-      object = arguments[0], sources = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-      _merge(function(destination, source) {
-        var key, ref, val;
-        for (key in source) {
-          if (!hasProp.call(source, key)) continue;
-          val = source[key];
-          if ((val != null ? val.constructor : void 0) === Object && ((ref = destination[key]) != null ? ref.constructor : void 0) === Object) {
-            destination[key] = microTK.prototype.merge(destination[key], val);
-          } else {
-            destination[key] = val;
-          }
-        }
-        return destination;
-      });
-      if (object == null) {
-        object = {};
-      }
-      for (i = sources.length - 1; i >= 0; i += -1) {
-        source = sources[i];
-        _merge(object, source);
-      }
-      return object;
-    };
-
-
-    /**
      * Prepends an HTMLElement into the selected elements.
      *
      * @param {HTMLElement} element - Element to be removed.
@@ -455,8 +418,47 @@
 
   root.MicroTK = MicroTK;
 
-  root.µ = function(_selector, _scope) {
+  root.microTK = function(_selector, _scope) {
     return new microTK(_selector, _scope);
   };
+
+
+  /**
+   * Recursivly merges objects.
+   *
+   * @param {Object} object - The destination object.
+   * @param {Object} [sourse...] - The sourse objects.
+   * @param {errorOnlyCallback} [callback] - Passes an error if one occures. 
+   * @returns {Object} Returns the merged destination object.
+   * @public
+   */
+
+  root.microTK.merge = function() {
+    var i, object, source, sources;
+    object = arguments[0], sources = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    _merge(function(destination, source) {
+      var key, ref, val;
+      for (key in source) {
+        if (!hasProp.call(source, key)) continue;
+        val = source[key];
+        if ((val != null ? val.constructor : void 0) === Object && ((ref = destination[key]) != null ? ref.constructor : void 0) === Object) {
+          destination[key] = microTK.prototype.merge(destination[key], val);
+        } else {
+          destination[key] = val;
+        }
+      }
+      return destination;
+    });
+    if (object == null) {
+      object = {};
+    }
+    for (i = sources.length - 1; i >= 0; i += -1) {
+      source = sources[i];
+      _merge(object, source);
+    }
+    return object;
+  };
+
+  root.µ = root.microTK;
 
 }).call(this);
