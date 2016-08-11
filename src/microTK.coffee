@@ -94,12 +94,7 @@ class MicroTK
     ###
     addClass: (className) ->
         for _element in @
-            if _element?.classList
-                _element.classList.add className
-            else 
-                classes = _element className.split " "
-                if className not in classes
-                    _element.className += ' ' + className;
+                _element?.classList?.add className
         this
 
     ###*
@@ -167,7 +162,7 @@ class MicroTK
     ###
     hasAttribute: (name, action) ->
         for _element in @
-            if _element hasAttribute
+            if _element.hasAttribute name
                 action element
         this
 
@@ -181,12 +176,8 @@ class MicroTK
     ###
     hasClass: (className, action) ->
         for _element in @
-            if _element classList?
-                if _element classList.contains className
+                if _element?.classList?.contains className
                     action element
-            else
-                if not _element className.match new RegExp '(\\s|^)' + className + '(\\s|$)'
-                    action _element
         this 
 
     ###*
@@ -242,12 +233,8 @@ class MicroTK
     ###
     removeClass: (className) ->
         for _element in @
-            if _element.classList?
-                _element.classList.remove className
-            else
-                classes = _element.className.split " "
-                classes.splice classes.indexOf className , 1
-                _element.className = classes.join " "
+            _element?.classList?.remove className
+
         this
 
     ###*
@@ -270,16 +257,7 @@ class MicroTK
     ###
     toggleClass: (className) ->
         for _element in @
-            if _element.classList?
-                _element.classList.toggle className
-            else 
-                classes = _element.className.split " "
-                indexOf = classes.indexOf className
-                if indexOf > 0
-                    classes.splice indexOfClass, 1
-                else
-                    classes.push className
-                _element.className = classes.join " "
+            _element?.classList?.toggle className
         this
 
 

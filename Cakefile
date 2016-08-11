@@ -3,7 +3,7 @@ fs = require 'fs'
 {spawn} = require 'child_process'
 
 build = (callback) ->
-  coffee = spawn 'coffee', ['-o', './', '-c', 'src/microTK.coffee']
+  coffee = spawn './node_modules/coffee-script/bin/coffee', ['-o', 'dist/', '-c', 'src/microTK.coffee']
   coffee.stderr.on 'data', (data) ->
     console.error data.toString()
   coffee.stdout.on 'data', (data) ->
@@ -15,7 +15,7 @@ task 'build', 'Build lib/ from src/', ->
   build()
 
 watch = (callback) ->
-    coffee = spawn 'coffee', ['-o', './', '-cw', 'src/microTK.coffee']
+    coffee = spawn './node_modules/coffee-script/bin/coffee', ['-o', 'dist/', '-cw', 'src/microTK.coffee']
     coffee.stderr.on 'data', (data) ->
         console.error data.toString()
     coffee.stdout.on 'data', (data) ->

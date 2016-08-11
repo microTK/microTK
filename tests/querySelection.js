@@ -1,14 +1,9 @@
-var test = require('tape');
+describe('querySelection', function() {
+    it("microTK exists", function () {
+        expect(typeof microTK).toEqual('function');
+    });
 
-test('microTK exists', function (t) {
-    t.plan(1);
-
-    t.is(typeof microTK,'function', "microTK is a function.");
-});
-
-test('µ exists', function (t) {
-    t.plan(2);
-
-    t.is(typeof µ, 'function', "µ is a function.");
-    t.isEqual(µ, microTK, "µ is equal to microTK");
+    it("µ exists and is equal to microTK", function () {
+        expect(µ).toEqual(microTK);
+    });
 });

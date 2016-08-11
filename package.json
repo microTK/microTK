@@ -1,26 +1,25 @@
 {
   "name": "microTK",
   "version": "0.0.1",
+  "author": "Todd Henderson <todd@todd-henderson.me",
   "main": "microTK.js",
-  "devDependencies": {
-    "browserify": "^13.1.0",
-    "tape": "^2.4.3",
-    "testling": "^1.7.1"
-  },
-  "testling": {
-    "html": "tests/index.html",
-    "browsers": [
-      "ie/6..latest",
-      "chrome/22..latest",
-      "firefox/16..latest",
-      "safari/latest",
-      "opera/11.0..latest",
-      "iphone/6..latest",
-      "ipad/6..latest",
-      "android-browser/latest"
-    ]
-  },
   "scripts": {
-    "test": "testling"
+    "build": "./node_modules/coffee-script/bin/cake build",
+    "test": "./node_modules/karma/bin/karma start karma.conf.js",
+    "watch": "./node_modules/coffee-script/bin/cake watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:thenderson21/microTK.git"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "install": "^0.8.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1"
   }
 }
