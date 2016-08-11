@@ -1,8 +1,7 @@
 # microTk
 A tiny javascript library
 
-[![browser support](https://ci.testling.com/$YOUR_USERNAME_HERE/max-by.png)
-](https://ci.testling.com/thenderson21/microTK)
+[![Build Status](https://drone.io/github.com/thenderson21/microTK/status.png)](https://drone.io/github.com/thenderson21/microTK/latest)
 
 # API
 
