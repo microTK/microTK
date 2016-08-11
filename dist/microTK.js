@@ -400,7 +400,7 @@
   root.MicroTK = MicroTK;
 
   root.microTK = function(_selector, _scope) {
-    return new microTK(_selector, _scope);
+    return new MicroTK(_selector, _scope);
   };
 
 

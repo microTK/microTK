@@ -264,7 +264,7 @@ class MicroTK
 root.MicroTK = MicroTK
 
 root.microTK = (_selector, _scope) -> 
-    new microTK(_selector, _scope)
+    new MicroTK(_selector, _scope)
 
 ###*
 # Recursivly merges objects.
