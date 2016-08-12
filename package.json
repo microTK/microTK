@@ -6,6 +6,7 @@
   "scripts": {
     "build": "./node_modules/coffee-script/bin/cake build",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
+    "test-Local": "./node_modules/karma/bin/karma start karma.local.conf.js",
     "watch": "./node_modules/coffee-script/bin/cake watch"
   },
   "repository": {

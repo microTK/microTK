@@ -152,7 +152,7 @@ class MicroTK
     ###
     each: (action) ->
         for _element in @
-            action element
+            action _element
         this
 
     ###*
@@ -166,7 +166,7 @@ class MicroTK
     hasAttribute: (name, action) ->
         for _element in @
             if _element.hasAttribute name
-                action element
+                action _element
         this
 
     ###*
@@ -180,7 +180,7 @@ class MicroTK
     hasClass: (className, action) ->
         for _element in @
                 if _element?.classList?.contains className
-                    action element
+                    action _element
         this 
 
     ###*
@@ -226,6 +226,7 @@ class MicroTK
     removeAttribute: (name) ->
         for _element in @
             _element.removeAttribute name
+        this
 
     ###*
     # Removes a class from the selected elements.
