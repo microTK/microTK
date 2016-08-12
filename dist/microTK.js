@@ -49,6 +49,7 @@
       if (_scope == null) {
         _scope = root.document;
       }
+      this.length = 0;
       if (!_selector) {
         return;
       }
@@ -103,18 +104,17 @@
      *
      * @param {string} name - The attribute to be added.
      * @param {string} value - The value of the attribute.
-     * @returns {MicroTK} A copy of the microTK object.
+     * @returns {MicroTK | } A copy of the microTK object.
      * @public
      */
 
     MicroTK.prototype.addAttribute = function(name, value) {
-      var _element, i, len, results;
-      results = [];
+      var _element, i, len;
       for (i = 0, len = this.length; i < len; i++) {
         _element = this[i];
-        results.push(_element.setAttribute(name(value)));
+        _element.setAttribute(name, value);
       }
-      return results;
+      return this;
     };
 
 

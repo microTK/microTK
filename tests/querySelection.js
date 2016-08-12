@@ -15,10 +15,19 @@ describe('querySelection', function() {
         expect(µ).toEqual(microTK);
     });
 
+    it("microTK()", function () {
+        var results =  microTK();
+
+        expect(results.constructor.name).toEqual("MicroTK");
+        expect(results[0]).not.toBeDefined();
+        expect(results.length).toEqual(0);
+    });
+
      it("microTK('body')", function () {
         var control =  document.querySelectorAll('body');
         var results =  microTK('body');
 
+        expect(results.constructor.name).toEqual("MicroTK");
         expect(results[0]).toEqual(control[0]);
         expect(results.length).toEqual(control.length);
     });
@@ -27,6 +36,7 @@ describe('querySelection', function() {
         var control =  document.querySelectorAll('#idFixtrue');
         var results =  microTK('#idFixtrue');
 
+        expect(results.constructor.name).toEqual("MicroTK");
         expect(results[0]).toEqual(control[0]);
         expect(results.length).toEqual(control.length);
     });
@@ -35,6 +45,7 @@ describe('querySelection', function() {
         var control =  document.querySelectorAll('.classFixture');
         var results =  microTK('.classFixture');
 
+        expect(results.constructor.name).toEqual("MicroTK");
         expect(results[0]).toEqual(control[0]);
         expect(results.length).toEqual(control.length);
     });

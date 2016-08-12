@@ -37,6 +37,8 @@ root = exports ? this
 
 class MicroTK
     constructor: (_selector, _scope = root.document)  -> 
+        @.length = 0
+
         if not _selector
             return
             
@@ -78,12 +80,13 @@ class MicroTK
     #
     # @param {string} name - The attribute to be added.
     # @param {string} value - The value of the attribute.
-    # @returns {MicroTK} A copy of the microTK object.
+    # @returns {MicroTK | } A copy of the microTK object.
     # @public
     ###
     addAttribute: (name, value) ->
         for _element in @
-            _element.setAttribute name value
+            _element.setAttribute name, value
+        this
 
     ###*
     # Adds a class to the selected elements.
