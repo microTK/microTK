@@ -15,7 +15,7 @@ describe('addAttribute()', function() {
         expect(results.constructor.name).toEqual("MicroTK");
         expect(sample.length).toEqual(control.length);
         for (var i = 0; i < sample.length; i++) {
-            expect(sample[i].getAttribute('title')).toEqual('test');
+            expect(control[i].getAttribute('title')).toEqual('test');
         }
     });
 
@@ -27,11 +27,11 @@ describe('addAttribute()', function() {
         expect(results.constructor.name).toEqual("MicroTK");
         expect(sample.length).toEqual(control.length);
         for (var i = 0; i < sample.length; i++) {
-            expect(sample[i].getAttribute('title')).toEqual('test');
+            expect(control[i].getAttribute('title')).toEqual('test');
         }
     });
 
-    it("microTK('.classFixture).addAttribute('title', 'test')", function () {
+    it("microTK('.classFixture').addAttribute('title', 'test')", function () {
         var control =  document.querySelectorAll('.classFixture');;
         var sample =  microTK('.classFixture');
         var results = sample.addAttribute('title', 'test');
@@ -39,7 +39,7 @@ describe('addAttribute()', function() {
         expect(results.constructor.name).toEqual("MicroTK");
         expect(sample.length).toEqual(control.length);
         for (var i = 0; i < sample.length; i++) {
-            expect(sample[i].getAttribute('title')).toEqual('test');
+            expect(control[i].getAttribute('title')).toEqual('test');
         }
     });
 });

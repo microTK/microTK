@@ -1,4 +1,4 @@
-describe('addEvent()', function() {
+describe('toggleClass()', function() {
     beforeEach(function() {
        document.body.innerHTML = '<p id="idFixtrue">Some HTML</p><div class="classFixture"></div><div class="classFixture"></div><div class="classFixture"></div><span></span>';
     });
@@ -7,45 +7,54 @@ describe('addEvent()', function() {
         document.body.innerHTML = '';
     });
 
-    it("microTK('span').addEvent('click', function(){ counter++})", function () {
+    it("microTK('span').toggleClass('test')", function () {
         var control =  document.querySelectorAll('span');
         var sample =  microTK('span');
-        var counter = 0;
-        var results = sample.addEvent('click', function(){ counter++});
+        var results = sample.toggleClass('test');
 
         expect(results.constructor.name).toEqual("MicroTK");
         expect(sample.length).toEqual(control.length);
         for (var i = 0; i < sample.length; i++) {
-           sample[i].click();
+            expect(control[i].className).toContain('test');
         }
-        expect(counter).toEqual(control.length);
+
+        sample.toggleClass('test');
+        for (var i = 0; i < sample.length; i++) {
+            expect(control[i].className).not.toContain('test');
+        }
     });
 
-    it("microTK('#idFixtrue').addEvent('click', function(){ counter++})", function () {
+    it("microTK('#idFixtrue').toggleClass('test')", function () {
         var control =  document.querySelectorAll('#idFixtrue');
         var sample =  microTK('#idFixtrue');
-        var counter = 0;
-        var results = sample.addEvent('click', function(){ counter++});
+        var results = sample.toggleClass('test');
 
         expect(results.constructor.name).toEqual("MicroTK");
         expect(sample.length).toEqual(control.length);
         for (var i = 0; i < sample.length; i++) {
-           sample[i].click();
+            expect(control[i].className).toContain('test');
         }
-        expect(counter).toEqual(control.length);
+
+        sample.toggleClass('test');
+        for (var i = 0; i < sample.length; i++) {
+            expect(control[i].className).not.toContain('test');
+        }
     });
 
-    it("microTK('.classFixture').addEvent('click', function(){ counter++})", function () {
+    it("microTK('.classFixture').toggleClass('test')", function () {
         var control =  document.querySelectorAll('.classFixture');;
         var sample =  microTK('.classFixture');
-        var counter = 0;
-        var results = sample.addEvent('click', function(){ counter++});
+        var results = sample.toggleClass('test');
 
         expect(results.constructor.name).toEqual("MicroTK");
         expect(sample.length).toEqual(control.length);
         for (var i = 0; i < sample.length; i++) {
-           sample[i].click();
+            expect(control[i].className).toContain('test');
         }
-        expect(counter).toEqual(control.length);
+
+        sample.toggleClass('test');
+        for (var i = 0; i < sample.length; i++) {
+            expect(control[i].className).not.toContain('test');
+        }
     });
 });

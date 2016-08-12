@@ -40,16 +40,8 @@
  # @param {HTMLElement} [scope=document] - The scope of the query selection.
  # @returns {microTK} An instance of the MicroTK object.
  # @public
-###
-
-###*
-# Recursively merges objects.
-#
-# @function merge
-# @param {Object} object - The destination object.
-# @param {Object} [sourse...] - The sourse objects.
-# @returns {Object} Returns the merged destination object.
-# @public
+ # @example
+ # var menu = µ("#menu");
 ###
 
 root = exports ? this
@@ -62,7 +54,15 @@ root = exports ? this
 ###
 class MicroTK
     constructor: (selector, scope = root.document)  -> 
+        ###*
+         # @member int length - The current number of selected elements.
+        ### 
         @.length = 0
+
+        ###*
+         # @member string version - The current version.
+        ### 
+        @.version = '0.0.1'
 
         if not selector
             return
@@ -107,6 +107,8 @@ class MicroTK
      # @param {string} value - The value of the attribute.
      # @returns {MicroTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").addAttribute("title", "test");
     ###
     addAttribute: (name, value) ->
         for _element in @
@@ -119,10 +121,12 @@ class MicroTK
      # @param {string} className - The class to be added.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").addClass("active");
     ###
     addClass: (className) ->
         for _element in @
-                _element?.classList?.add className
+            _element?.classList?.add className
         this
 
     ###*
@@ -132,6 +136,10 @@ class MicroTK
      # @param {function} action - Function to be run on event.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").addEvent("click", function (e){
+     #     µ(e).toggleClass("active");   
+     # });
     ###
     addEvent: (event, action) ->
         _contains = (object,  value) ->
@@ -162,10 +170,13 @@ class MicroTK
      # @param {HTMLElement} element - Element to be removed.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # var element = document.createElement("div")
+     # µ("#menu").append(element); 
     ###
     append: (element) ->
         for _element in @
-            _element.appendChild element
+            _element?.appendChild element.cloneNode true
         this
     
     ###*
@@ -174,6 +185,10 @@ class MicroTK
      # @param {elementAction} action - Function to be run when the element has providec class.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").each(function (e){
+     #     e.classList.add("active");   
+     # });
     ###
     each: (action) ->
         for _element in @
@@ -187,6 +202,10 @@ class MicroTK
      # @param {elementAction} action - Function to be run when the element has provided attribute.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").hasAttribute("title", function (e){
+     #     e.title = "woohoo"; 
+     # });
     ###
     hasAttribute: (name, action) ->
         for _element in @
@@ -201,6 +220,10 @@ class MicroTK
      # @param {elementAction} action - Function to be run when the element has providec class.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").hasClass("active", function (e){
+     #     e.classList.remove("active");   
+     # });
     ###
     hasClass: (className, action) ->
         for _element in @
@@ -214,13 +237,16 @@ class MicroTK
      # @param {HTMLElement} element - Element to be removed.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # var element = document.createElement("div")
+     # µ("#menu").prepend(element); 
     ###
-    prepend: (elements) ->
+    prepend: (element) ->
         for _element in @ 
             if _element.firstChild?
-                _element.insertBefore elements, _element.firstChild 
+                _element.insertBefore element.cloneNode(true), _element.firstChild 
             else 
-                _element.appendChild elements
+                _element.appendChild element.cloneNode true
         this
 
     ###*
@@ -228,6 +254,8 @@ class MicroTK
      #
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").remove();
     ###
     remove: () ->
         for _element, key in @
@@ -247,6 +275,8 @@ class MicroTK
      # @param {string} name - The attribute to be added.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").removeAttribute("id");
     ###
     removeAttribute: (name) ->
         for _element in @
@@ -259,6 +289,8 @@ class MicroTK
      # @param {string} className - Class to be removed.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").removeClass("active");
     ###
     removeClass: (className) ->
         for _element in @
@@ -267,22 +299,13 @@ class MicroTK
         this
 
     ###*
-     # Removes the id from the selected elements.
-     #
-     # @returns {microTK} A copy of the MicroTK object.
-     # @public
-    ###
-    removeId: () ->
-        for _element in @
-            _element.removeAttribute 'id'
-        this
-
-    ###*
      # Toggles a class in selected elements.
      #
      # @param {string} className - Class to be toggled.
      # @returns {microTK} A copy of the MicroTK object.
      # @public
+     # @example
+     # µ("#menu").toggleClass("active");
     ###
     toggleClass: (className) ->
         for _element in @
@@ -290,23 +313,5 @@ class MicroTK
         this
 
 
-root.microTK = (selector, scope) -> 
+root.µ = root.microTK = (selector, scope) -> 
     new MicroTK(selector, scope)
-
-root.microTK.merge = (object, sources...) ->
-    _merge (destination, source) -> 
-        for own key, val of source
-            if val?.constructor is Object and destination[key]?.constructor is Object
-                destination[key] = microTK::merge destination[key], val
-            else
-                destination[key] = val
-        destination
-
-    object ?= {}
-
-    for source in sources by -1
-        _merge object, source
-
-    return object
-
-root.µ = root.microTK

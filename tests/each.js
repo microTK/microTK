@@ -29,7 +29,7 @@ describe('each()', function() {
         expect(counter).toEqual(control.length);
     });
 
-    it("microTK('.classFixture).each(function(){ counter++})", function () {
+    it("microTK('.classFixture').each(function(){ counter++})", function () {
         var control =  document.querySelectorAll('.classFixture');;
         var sample =  microTK('.classFixture');
         var counter = 0;

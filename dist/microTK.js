@@ -44,23 +44,12 @@
   * @param {HTMLElement} [scope=document] - The scope of the query selection.
   * @returns {microTK} An instance of the MicroTK object.
   * @public
- */
-
-
-/**
- * Recursively merges objects.
- *
- * @function merge
- * @param {Object} object - The destination object.
- * @param {Object} [sourse...] - The sourse objects.
- * @returns {Object} Returns the merged destination object.
- * @public
+  * @example
+  * var menu = µ("#menu");
  */
 
 (function() {
-  var MicroTK, root,
-    slice = [].slice,
-    hasProp = {}.hasOwnProperty;
+  var MicroTK, root;
 
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
@@ -78,7 +67,16 @@
       if (scope == null) {
         scope = root.document;
       }
+
+      /**
+        * @member int length - The current number of selected elements.
+       */
       this.length = 0;
+
+      /**
+        * @member string version - The current version.
+       */
+      this.version = '0.0.1';
       if (!selector) {
         return;
       }
@@ -135,6 +133,8 @@
       * @param {string} value - The value of the attribute.
       * @returns {MicroTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").addAttribute("title", "test");
      */
 
     MicroTK.prototype.addAttribute = function(name, value) {
@@ -153,6 +153,8 @@
       * @param {string} className - The class to be added.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").addClass("active");
      */
 
     MicroTK.prototype.addClass = function(className) {
@@ -176,6 +178,10 @@
       * @param {function} action - Function to be run on event.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").addEvent("click", function (e){
+      *     µ(e).toggleClass("active");   
+      * });
      */
 
     MicroTK.prototype.addEvent = function(event, action) {
@@ -224,13 +230,18 @@
       * @param {HTMLElement} element - Element to be removed.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * var element = document.createElement("div")
+      * µ("#menu").append(element);
      */
 
     MicroTK.prototype.append = function(element) {
       var _element, i, len;
       for (i = 0, len = this.length; i < len; i++) {
         _element = this[i];
-        _element.appendChild(element);
+        if (_element != null) {
+          _element.appendChild(element.cloneNode(true));
+        }
       }
       return this;
     };
@@ -242,6 +253,10 @@
       * @param {elementAction} action - Function to be run when the element has providec class.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").each(function (e){
+      *     e.classList.add("active");   
+      * });
      */
 
     MicroTK.prototype.each = function(action) {
@@ -261,6 +276,10 @@
       * @param {elementAction} action - Function to be run when the element has provided attribute.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").hasAttribute("title", function (e){
+      *     e.title = "woohoo"; 
+      * });
      */
 
     MicroTK.prototype.hasAttribute = function(name, action) {
@@ -282,6 +301,10 @@
       * @param {elementAction} action - Function to be run when the element has providec class.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").hasClass("active", function (e){
+      *     e.classList.remove("active");   
+      * });
      */
 
     MicroTK.prototype.hasClass = function(className, action) {
@@ -302,16 +325,19 @@
       * @param {HTMLElement} element - Element to be removed.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * var element = document.createElement("div")
+      * µ("#menu").prepend(element);
      */
 
-    MicroTK.prototype.prepend = function(elements) {
+    MicroTK.prototype.prepend = function(element) {
       var _element, i, len;
       for (i = 0, len = this.length; i < len; i++) {
         _element = this[i];
         if (_element.firstChild != null) {
-          _element.insertBefore(elements, _element.firstChild);
+          _element.insertBefore(element.cloneNode(true), _element.firstChild);
         } else {
-          _element.appendChild(elements);
+          _element.appendChild(element.cloneNode(true));
         }
       }
       return this;
@@ -323,6 +349,8 @@
       *
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").remove();
      */
 
     MicroTK.prototype.remove = function() {
@@ -349,6 +377,8 @@
       * @param {string} name - The attribute to be added.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").removeAttribute("id");
      */
 
     MicroTK.prototype.removeAttribute = function(name) {
@@ -367,6 +397,8 @@
       * @param {string} className - Class to be removed.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").removeClass("active");
      */
 
     MicroTK.prototype.removeClass = function(className) {
@@ -384,28 +416,13 @@
 
 
     /**
-      * Removes the id from the selected elements.
-      *
-      * @returns {microTK} A copy of the MicroTK object.
-      * @public
-     */
-
-    MicroTK.prototype.removeId = function() {
-      var _element, i, len;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        _element.removeAttribute('id');
-      }
-      return this;
-    };
-
-
-    /**
       * Toggles a class in selected elements.
       *
       * @param {string} className - Class to be toggled.
       * @returns {microTK} A copy of the MicroTK object.
       * @public
+      * @example
+      * µ("#menu").toggleClass("active");
      */
 
     MicroTK.prototype.toggleClass = function(className) {
@@ -425,36 +442,8 @@
 
   })();
 
-  root.microTK = function(selector, scope) {
+  root.µ = root.microTK = function(selector, scope) {
     return new MicroTK(selector, scope);
   };
-
-  root.microTK.merge = function() {
-    var i, object, source, sources;
-    object = arguments[0], sources = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-    _merge(function(destination, source) {
-      var key, ref, val;
-      for (key in source) {
-        if (!hasProp.call(source, key)) continue;
-        val = source[key];
-        if ((val != null ? val.constructor : void 0) === Object && ((ref = destination[key]) != null ? ref.constructor : void 0) === Object) {
-          destination[key] = microTK.prototype.merge(destination[key], val);
-        } else {
-          destination[key] = val;
-        }
-      }
-      return destination;
-    });
-    if (object == null) {
-      object = {};
-    }
-    for (i = sources.length - 1; i >= 0; i += -1) {
-      source = sources[i];
-      _merge(object, source);
-    }
-    return object;
-  };
-
-  root.µ = root.microTK;
 
 }).call(this);
