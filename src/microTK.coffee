@@ -3,8 +3,7 @@
  #
  # @author Todd Henderson <todd@todd-henderson.me>
  # @license The MIT License (MIT)
- #
- # Copyright (c) 2014-2016 Todd Henderson
+ # @copyright Copyright (c) 2014-2016 Todd Henderson
  #
  # Permission is hereby granted, free of charge, to any person obtaining a copy
  # of this software and associated documentation files (the "Software"), to deal
@@ -33,42 +32,68 @@
  # @param {HTMLElement} element
 ###
 
+###*
+ # Creates a new instance of MicroTK with specified query paremeters or element(s)
+ #
+ # @function microTK
+ # @param {string|HTMLElement} selector - The selector to be queried for or the HTMLElement(s) to be added.
+ # @param {HTMLElement} [scope=document] - The scope of the query selection.
+ # @returns {microTK} An instance of the MicroTK object.
+ # @public
+###
+
+###*
+# Recursively merges objects.
+#
+# @function merge
+# @param {Object} object - The destination object.
+# @param {Object} [sourse...] - The sourse objects.
+# @returns {Object} Returns the merged destination object.
+# @public
+###
+
 root = exports ? this
 
+###*
+ # The main class of the microTK library, it is a list of selected HTMLElement 
+ # that various actions be performed on.
+ # 
+ # @class MicroTK
+###
 class MicroTK
-    constructor: (_selector, _scope = root.document)  -> 
+    constructor: (selector, scope = root.document)  -> 
         @.length = 0
 
-        if not _selector
+        if not selector
             return
             
         if typeof result is 'string'
-            _selector = _selector.trim()
+            selector = selector.trim()
 
-        if _selector instanceof Element 
-            @[0] = _selector
+        if selector instanceof Element 
+            @[0] = selector
             @.length = 1
-        else if _selector[..._selector.length] is '#' and _selector.indexOf " " is -1 and _selector.indexOf "." is -1
-            _node = _scope.getElementById _selector.replace /\#/g, ""
+        else if selector[...selector.length] is '#' and selector.indexOf " " is -1 and selector.indexOf "." is -1
+            _node = scope.getElementById selector.replace /\#/g, ""
             if _node?
                 @[0] = _node 
                 @.length = 1
-        else if _selector[..._selector.length] is "." and _selector.indexOf "#"  is -1 and _selector.indexOf ":"  is -1 and _selector.indexOf " " is -1
-            _nodelist = _scope.getElementsByClassName _selector.replace /\./g, " "
+        else if selector[...selector.length] is "." and selector.indexOf "#"  is -1 and selector.indexOf ":"  is -1 and selector.indexOf " " is -1
+            _nodelist = scope.getElementsByClassName selector.replace /\./g, " "
             @.length = 0
             if _nodelist?
                 for node, key in _nodelist
                     @[key] = node
                     @.length++
-        else if  /^[a-zA-Z]+$/.test _selector
-            _nodelist =  _scope.getElementsByTagName _selector 
+        else if  /^[a-zA-Z]+$/.test selector
+            _nodelist =  scope.getElementsByTagName selector 
             @.length = 0
             if _nodelist?
                 for node, key in _nodelist
                     @[key] = node
                     @.length++
         else
-            _nodelist =  _scope.querySelectorAll _selector
+            _nodelist =  scope.querySelectorAll selector
             @.length = 0
             if _nodelist?
                 for node, key in _nodelist
@@ -76,12 +101,12 @@ class MicroTK
                     @.length++
 
     ###*
-    # Adds an attribute to the selected elements.
-    #
-    # @param {string} name - The attribute to be added.
-    # @param {string} value - The value of the attribute.
-    # @returns {MicroTK | } A copy of the microTK object.
-    # @public
+     # Adds an attribute to the selected elements.
+     #
+     # @param {string} name - The attribute to be added.
+     # @param {string} value - The value of the attribute.
+     # @returns {MicroTK} A copy of the MicroTK object.
+     # @public
     ###
     addAttribute: (name, value) ->
         for _element in @
@@ -89,11 +114,11 @@ class MicroTK
         this
 
     ###*
-    # Adds a class to the selected elements.
-    #
-    # @param {string} className - The class to be added.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Adds a class to the selected elements.
+     #
+     # @param {string} className - The class to be added.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     addClass: (className) ->
         for _element in @
@@ -101,12 +126,12 @@ class MicroTK
         this
 
     ###*
-    # Adds an event to the selected elements.
-    #
-    # @param {string} event - Event to be added.
-    # @param {function} action - Function to be run on event.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Adds an event to the selected elements.
+     #
+     # @param {string} event - Event to be added.
+     # @param {function} action - Function to be run on event.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     addEvent: (event, action) ->
         _contains = (object,  value) ->
@@ -132,11 +157,11 @@ class MicroTK
         this
 
     ###*
-    # Appends an HTMLElement into the selected elements.
-    #
-    # @param {HTMLElement} element - Element to be removed.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Appends an HTMLElement into the selected elements.
+     #
+     # @param {HTMLElement} element - Element to be removed.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     append: (element) ->
         for _element in @
@@ -144,11 +169,11 @@ class MicroTK
         this
     
     ###*
-    # Performs an action on the selected elements
-    #
-    # @param {elementAction} action - Function to be run when the element has providec class.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Performs an action on the selected elements
+     #
+     # @param {elementAction} action - Function to be run when the element has providec class.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     each: (action) ->
         for _element in @
@@ -156,12 +181,12 @@ class MicroTK
         this
 
     ###*
-    # Checks to see if elements contains provided class and performs provided action.
-    #
-    # @param {string} name - The attribute to be added.
-    # @param {elementAction} action - Function to be run when the element has provided attribute.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Checks to see if elements contains provided class and performs provided action.
+     #
+     # @param {string} name - The attribute to be added.
+     # @param {elementAction} action - Function to be run when the element has provided attribute.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     hasAttribute: (name, action) ->
         for _element in @
@@ -170,12 +195,12 @@ class MicroTK
         this
 
     ###*
-    # Checks to see ff elements contains provided class and performs provided action.
-    #
-    # @param {string} className - Element to be tested for.
-    # @param {elementAction} action - Function to be run when the element has providec class.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Checks to see ff elements contains provided class and performs provided action.
+     #
+     # @param {string} className - Element to be tested for.
+     # @param {elementAction} action - Function to be run when the element has providec class.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     hasClass: (className, action) ->
         for _element in @
@@ -184,11 +209,11 @@ class MicroTK
         this 
 
     ###*
-    # Prepends an HTMLElement into the selected elements.
-    #
-    # @param {HTMLElement} element - Element to be removed.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Prepends an HTMLElement into the selected elements.
+     #
+     # @param {HTMLElement} element - Element to be removed.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     prepend: (elements) ->
         for _element in @ 
@@ -199,10 +224,10 @@ class MicroTK
         this
 
     ###*
-    # Removes the selected elements from the DOM.
-    #
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Removes the selected elements from the DOM.
+     #
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     remove: () ->
         for _element, key in @
@@ -217,11 +242,11 @@ class MicroTK
         this
 
     ###*
-    # Removes an attribute from the selected elements.
-    #
-    # @param {string} name - The attribute to be added.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Removes an attribute from the selected elements.
+     #
+     # @param {string} name - The attribute to be added.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     removeAttribute: (name) ->
         for _element in @
@@ -229,11 +254,11 @@ class MicroTK
         this
 
     ###*
-    # Removes a class from the selected elements.
-    #
-    # @param {string} className - Class to be removed.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Removes a class from the selected elements.
+     #
+     # @param {string} className - Class to be removed.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     removeClass: (className) ->
         for _element in @
@@ -242,10 +267,10 @@ class MicroTK
         this
 
     ###*
-    # Removes the id from the selected elements.
-    #
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Removes the id from the selected elements.
+     #
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     removeId: () ->
         for _element in @
@@ -253,11 +278,11 @@ class MicroTK
         this
 
     ###*
-    # Toggles a class in selected elements.
-    #
-    # @param {string} className - Class to be toggled.
-    # @returns {microTK} A copy of the microTK object.
-    # @public
+     # Toggles a class in selected elements.
+     #
+     # @param {string} className - Class to be toggled.
+     # @returns {microTK} A copy of the MicroTK object.
+     # @public
     ###
     toggleClass: (className) ->
         for _element in @
@@ -265,20 +290,9 @@ class MicroTK
         this
 
 
-root.MicroTK = MicroTK
+root.microTK = (selector, scope) -> 
+    new MicroTK(selector, scope)
 
-root.microTK = (_selector, _scope) -> 
-    new MicroTK(_selector, _scope)
-
-###*
-# Recursivly merges objects.
-#
-# @param {Object} object - The destination object.
-# @param {Object} [sourse...] - The sourse objects.
-# @param {errorOnlyCallback} [callback] - Passes an error if one occures. 
-# @returns {Object} Returns the merged destination object.
-# @public
-###
 root.microTK.merge = (object, sources...) ->
     _merge (destination, source) -> 
         for own key, val of source

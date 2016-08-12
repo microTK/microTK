@@ -5,8 +5,7 @@
   *
   * @author Todd Henderson <todd@todd-henderson.me>
   * @license The MIT License (MIT)
-  *
-  * Copyright (c) 2014-2016 Todd Henderson
+  * @copyright Copyright (c) 2014-2016 Todd Henderson
   *
   * Permission is hereby granted, free of charge, to any person obtaining a copy
   * of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +35,28 @@
   * @param {HTMLElement} element
  */
 
+
+/**
+  * Creates a new instance of MicroTK with specified query paremeters or element(s)
+  *
+  * @function microTK
+  * @param {string|HTMLElement} selector - The selector to be queried for or the HTMLElement(s) to be added.
+  * @param {HTMLElement} [scope=document] - The scope of the query selection.
+  * @returns {microTK} An instance of the MicroTK object.
+  * @public
+ */
+
+
+/**
+ * Recursively merges objects.
+ *
+ * @function merge
+ * @param {Object} object - The destination object.
+ * @param {Object} [sourse...] - The sourse objects.
+ * @returns {Object} Returns the merged destination object.
+ * @public
+ */
+
 (function() {
   var MicroTK, root,
     slice = [].slice,
@@ -43,30 +64,38 @@
 
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
+
+  /**
+    * The main class of the microTK library, it is a list of selected HTMLElement 
+    * that various actions be performed on.
+    * 
+    * @class MicroTK
+   */
+
   MicroTK = (function() {
-    function MicroTK(_selector, _scope) {
+    function MicroTK(selector, scope) {
       var _node, _nodelist, i, j, k, key, len, len1, len2, node;
-      if (_scope == null) {
-        _scope = root.document;
+      if (scope == null) {
+        scope = root.document;
       }
       this.length = 0;
-      if (!_selector) {
+      if (!selector) {
         return;
       }
       if (typeof result === 'string') {
-        _selector = _selector.trim();
+        selector = selector.trim();
       }
-      if (_selector instanceof Element) {
-        this[0] = _selector;
+      if (selector instanceof Element) {
+        this[0] = selector;
         this.length = 1;
-      } else if (_selector.slice(0, _selector.length) === '#' && _selector.indexOf(" " === -1 && _selector.indexOf("." === -1))) {
-        _node = _scope.getElementById(_selector.replace(/\#/g, ""));
+      } else if (selector.slice(0, selector.length) === '#' && selector.indexOf(" " === -1 && selector.indexOf("." === -1))) {
+        _node = scope.getElementById(selector.replace(/\#/g, ""));
         if (_node != null) {
           this[0] = _node;
           this.length = 1;
         }
-      } else if (_selector.slice(0, _selector.length) === "." && _selector.indexOf("#" === -1 && _selector.indexOf(":" === -1 && _selector.indexOf(" " === -1)))) {
-        _nodelist = _scope.getElementsByClassName(_selector.replace(/\./g, " "));
+      } else if (selector.slice(0, selector.length) === "." && selector.indexOf("#" === -1 && selector.indexOf(":" === -1 && selector.indexOf(" " === -1)))) {
+        _nodelist = scope.getElementsByClassName(selector.replace(/\./g, " "));
         this.length = 0;
         if (_nodelist != null) {
           for (key = i = 0, len = _nodelist.length; i < len; key = ++i) {
@@ -75,8 +104,8 @@
             this.length++;
           }
         }
-      } else if (/^[a-zA-Z]+$/.test(_selector)) {
-        _nodelist = _scope.getElementsByTagName(_selector);
+      } else if (/^[a-zA-Z]+$/.test(selector)) {
+        _nodelist = scope.getElementsByTagName(selector);
         this.length = 0;
         if (_nodelist != null) {
           for (key = j = 0, len1 = _nodelist.length; j < len1; key = ++j) {
@@ -86,7 +115,7 @@
           }
         }
       } else {
-        _nodelist = _scope.querySelectorAll(_selector);
+        _nodelist = scope.querySelectorAll(selector);
         this.length = 0;
         if (_nodelist != null) {
           for (key = k = 0, len2 = _nodelist.length; k < len2; key = ++k) {
@@ -100,12 +129,12 @@
 
 
     /**
-     * Adds an attribute to the selected elements.
-     *
-     * @param {string} name - The attribute to be added.
-     * @param {string} value - The value of the attribute.
-     * @returns {MicroTK | } A copy of the microTK object.
-     * @public
+      * Adds an attribute to the selected elements.
+      *
+      * @param {string} name - The attribute to be added.
+      * @param {string} value - The value of the attribute.
+      * @returns {MicroTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.addAttribute = function(name, value) {
@@ -119,11 +148,11 @@
 
 
     /**
-     * Adds a class to the selected elements.
-     *
-     * @param {string} className - The class to be added.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Adds a class to the selected elements.
+      *
+      * @param {string} className - The class to be added.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.addClass = function(className) {
@@ -141,12 +170,12 @@
 
 
     /**
-     * Adds an event to the selected elements.
-     *
-     * @param {string} event - Event to be added.
-     * @param {function} action - Function to be run on event.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Adds an event to the selected elements.
+      *
+      * @param {string} event - Event to be added.
+      * @param {function} action - Function to be run on event.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.addEvent = function(event, action) {
@@ -190,11 +219,11 @@
 
 
     /**
-     * Appends an HTMLElement into the selected elements.
-     *
-     * @param {HTMLElement} element - Element to be removed.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Appends an HTMLElement into the selected elements.
+      *
+      * @param {HTMLElement} element - Element to be removed.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.append = function(element) {
@@ -208,11 +237,11 @@
 
 
     /**
-     * Performs an action on the selected elements
-     *
-     * @param {elementAction} action - Function to be run when the element has providec class.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Performs an action on the selected elements
+      *
+      * @param {elementAction} action - Function to be run when the element has providec class.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.each = function(action) {
@@ -226,12 +255,12 @@
 
 
     /**
-     * Checks to see if elements contains provided class and performs provided action.
-     *
-     * @param {string} name - The attribute to be added.
-     * @param {elementAction} action - Function to be run when the element has provided attribute.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Checks to see if elements contains provided class and performs provided action.
+      *
+      * @param {string} name - The attribute to be added.
+      * @param {elementAction} action - Function to be run when the element has provided attribute.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.hasAttribute = function(name, action) {
@@ -239,7 +268,7 @@
       for (i = 0, len = this.length; i < len; i++) {
         _element = this[i];
         if (_element.hasAttribute(name)) {
-          action(element);
+          action(_element);
         }
       }
       return this;
@@ -247,12 +276,12 @@
 
 
     /**
-     * Checks to see ff elements contains provided class and performs provided action.
-     *
-     * @param {string} className - Element to be tested for.
-     * @param {elementAction} action - Function to be run when the element has providec class.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Checks to see ff elements contains provided class and performs provided action.
+      *
+      * @param {string} className - Element to be tested for.
+      * @param {elementAction} action - Function to be run when the element has providec class.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.hasClass = function(className, action) {
@@ -260,7 +289,7 @@
       for (i = 0, len = this.length; i < len; i++) {
         _element = this[i];
         if (_element != null ? (ref = _element.classList) != null ? ref.contains(className) : void 0 : void 0) {
-          action(element);
+          action(_element);
         }
       }
       return this;
@@ -268,11 +297,11 @@
 
 
     /**
-     * Prepends an HTMLElement into the selected elements.
-     *
-     * @param {HTMLElement} element - Element to be removed.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Prepends an HTMLElement into the selected elements.
+      *
+      * @param {HTMLElement} element - Element to be removed.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.prepend = function(elements) {
@@ -290,10 +319,10 @@
 
 
     /**
-     * Removes the selected elements from the DOM.
-     *
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Removes the selected elements from the DOM.
+      *
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.remove = function() {
@@ -315,30 +344,29 @@
 
 
     /**
-     * Removes an attribute from the selected elements.
-     *
-     * @param {string} name - The attribute to be added.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Removes an attribute from the selected elements.
+      *
+      * @param {string} name - The attribute to be added.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.removeAttribute = function(name) {
-      var _element, i, len, results;
-      results = [];
+      var _element, i, len;
       for (i = 0, len = this.length; i < len; i++) {
         _element = this[i];
-        results.push(_element.removeAttribute(name));
+        _element.removeAttribute(name);
       }
-      return results;
+      return this;
     };
 
 
     /**
-     * Removes a class from the selected elements.
-     *
-     * @param {string} className - Class to be removed.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Removes a class from the selected elements.
+      *
+      * @param {string} className - Class to be removed.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.removeClass = function(className) {
@@ -356,10 +384,10 @@
 
 
     /**
-     * Removes the id from the selected elements.
-     *
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Removes the id from the selected elements.
+      *
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.removeId = function() {
@@ -373,11 +401,11 @@
 
 
     /**
-     * Toggles a class in selected elements.
-     *
-     * @param {string} className - Class to be toggled.
-     * @returns {microTK} A copy of the microTK object.
-     * @public
+      * Toggles a class in selected elements.
+      *
+      * @param {string} className - Class to be toggled.
+      * @returns {microTK} A copy of the MicroTK object.
+      * @public
      */
 
     MicroTK.prototype.toggleClass = function(className) {
@@ -397,22 +425,9 @@
 
   })();
 
-  root.MicroTK = MicroTK;
-
-  root.microTK = function(_selector, _scope) {
-    return new MicroTK(_selector, _scope);
+  root.microTK = function(selector, scope) {
+    return new MicroTK(selector, scope);
   };
-
-
-  /**
-   * Recursivly merges objects.
-   *
-   * @param {Object} object - The destination object.
-   * @param {Object} [sourse...] - The sourse objects.
-   * @param {errorOnlyCallback} [callback] - Passes an error if one occures. 
-   * @returns {Object} Returns the merged destination object.
-   * @public
-   */
 
   root.microTK.merge = function() {
     var i, object, source, sources;

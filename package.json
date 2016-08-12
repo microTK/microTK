@@ -5,6 +5,8 @@
   "main": "microTK.js",
   "scripts": {
     "build": "./node_modules/coffee-script/bin/cake build",
+    "doc": "./node_modules/jsdox/bin/jsdox --templateDir templates  dist/microTK.js; cp output/microTK.md README.md; rm -rf output/",
+    "minify": "./node_modules/uglify-js/bin/uglifyjs dist/microTK.js -o dist/microTK.min.js --source-map dist/microTK.min.map -c --preamble '/**  microTK v0.0.1 @Copyright (c) Todd Henderson  @license MIT */'",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "test-Local": "./node_modules/karma/bin/karma start karma.local.conf.js",
     "watch": "./node_modules/coffee-script/bin/cake watch"
@@ -17,6 +19,7 @@
     "coffee-script": "^1.10.0",
     "install": "^0.8.1",
     "jasmine-core": "^2.4.1",
+    "jsdox": "^0.4.10",
     "karma": "^1.2.0",
     "karma-chrome-launcher": "^1.0.1",
     "karma-firefox-launcher": "^1.0.0",
