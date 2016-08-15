@@ -29,20 +29,15 @@ A tiny JavaScript library for basic dom manipulation.
 
 # Global
 
-
-
-
-
-
 ### microTK(selector, scope) 
 
 Creates a new instance of MicroTK with specified query paremeters or element(s)
 
 **Parameters**
 
-**selector**: `string | HTMLElement`, The selector to be queried for or the HTMLElement(s) to be added.
+ - **selector**: `string | HTMLElement`, The selector to be queried for or the HTMLElement(s) to be added.
 
-**scope**: `HTMLElement`, The scope of the query selection.
+ - **scope**: `HTMLElement`, The scope of the query selection.
 
 **Returns**: `microTK`, An instance of the MicroTK object.
 
@@ -54,21 +49,23 @@ var menu = µ("#menu");
 
 ## Class: MicroTK
 The main class of the microTK library, it is a list of selected HTMLElement 
-that various actions be performed on.
+that various actions can be performed on.
 
-**int**:  , The main class of the microTK library, it is a list of selected HTMLElement 
-that various actions be performed on.
-**string**:  , The main class of the microTK library, it is a list of selected HTMLElement 
-that various actions be performed on.
+### MicroTK.length
+`int`, The current number of selected elements.
+
+### MicroTK.version
+`string`, The current version. 
+
 ### MicroTK.addAttribute(name, value) 
 
 Adds an attribute to the selected elements.
 
 **Parameters**
 
-**name**: `string`, The attribute to be added.
+ - **name**: `string`, The attribute to be added.
 
-**value**: `string`, The value of the attribute.
+ - **value**: `string`, The value of the attribute.
 
 **Returns**: `MicroTK`, A copy of the MicroTK object.
 
@@ -83,7 +80,7 @@ Adds a class to the selected elements.
 
 **Parameters**
 
-**className**: `string`, The class to be added.
+ - **className**: `string`, The class to be added.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -98,9 +95,9 @@ Adds an event to the selected elements.
 
 **Parameters**
 
-**event**: `string`, Event to be added.
+ - **event**: `string`, Event to be added.
 
-**action**: `function`, Function to be run on event.
+ - **action**: `function`, Function to be run on event.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -117,7 +114,7 @@ Appends an HTMLElement into the selected elements.
 
 **Parameters**
 
-**element**: `HTMLElement`, Element to be removed.
+ - **element**: `HTMLElement`, Element to be removed.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -133,7 +130,7 @@ Performs an action on the selected elements
 
 **Parameters**
 
-**action**: `elementAction`, Function to be run when the element has providec class.
+ - **action**: `elementAction`, Function to be run when the element has providec class.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -150,9 +147,9 @@ Checks to see if elements contains provided class and performs provided action.
 
 **Parameters**
 
-**name**: `string`, The attribute to be added.
+ - **name**: `string`, The attribute to be added.
 
-**action**: `elementAction`, Function to be run when the element has provided attribute.
+ - **action**: `elementAction`, Function to be run when the element has provided attribute.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -169,9 +166,9 @@ Checks to see ff elements contains provided class and performs provided action.
 
 **Parameters**
 
-**className**: `string`, Element to be tested for.
+ - **className**: `string`, Element to be tested for.
 
-**action**: `elementAction`, Function to be run when the element has providec class.
+ - **action**: `elementAction`, Function to be run when the element has providec class.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -188,7 +185,7 @@ Prepends an HTMLElement into the selected elements.
 
 **Parameters**
 
-**element**: `HTMLElement`, Element to be removed.
+ - **element**: `HTMLElement`, Element to be removed.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -215,7 +212,7 @@ Removes an attribute from the selected elements.
 
 **Parameters**
 
-**name**: `string`, The attribute to be added.
+ - **name**: `string`, The attribute to be added.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -230,7 +227,7 @@ Removes a class from the selected elements.
 
 **Parameters**
 
-**className**: `string`, Class to be removed.
+ - **className**: `string`, Class to be removed.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -245,7 +242,7 @@ Toggles a class in selected elements.
 
 **Parameters**
 
-**className**: `string`, Class to be toggled.
+ - **className**: `string`, Class to be toggled.
 
 **Returns**: `microTK`, A copy of the MicroTK object.
 
@@ -254,16 +251,15 @@ Toggles a class in selected elements.
 µ("#menu").toggleClass("active");
 ```
 
-
-
-
 # Author
 
- - Todd Henderson (thenderson21, Origional Author)
+ - Todd Henderson (thenderson21)
 
 # License
 
-Copyright (c) 2014-2016 Todd Henderson
+The MIT License
+
+Copyright (c) 2014-2016 Todd Henderson. http://microtk.io
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
