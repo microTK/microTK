@@ -312,6 +312,6 @@ class MicroTK
             _element?.classList?.toggle className
         this
 
-
+root.MicroTK = MicroTK
 root.µ = root.microTK = (selector, scope) -> 
     new MicroTK(selector, scope)
