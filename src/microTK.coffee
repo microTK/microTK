@@ -62,7 +62,7 @@ class MicroTK
         ###*
          # @member string version - The current version.
         ### 
-        @.version = '0.0.1'
+        @.version = 'v0.0.2-pre'
 
         if not selector
             return

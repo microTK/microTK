@@ -76,7 +76,7 @@
       /**
         * @member string version - The current version.
        */
-      this.version = '0.0.1';
+      this.version = 'v0.0.2-pre';
       if (!selector) {
         return;
       }
