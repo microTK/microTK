@@ -1,5 +1,5 @@
 ###*
- # microTK - v0.0.2
+ # microTK - v0.0.3
  #
  # @author Todd Henderson <todd@todd-henderson.me>
  # @license The MIT License (MIT)
@@ -62,7 +62,7 @@ class MicroTK
         ###*
          # @member string version - The current version.
         ### 
-        @.version = 'v0.0.2-pre'
+        @.version = 'v0.0.3-pre'
 
         if not selector
             return
