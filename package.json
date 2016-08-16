@@ -1,8 +1,8 @@
 {
   "name": "microTK",
   "version": "v0.0.2-pre",
-  "author": "Todd Henderson <todd@todd-henderson.me",
-  "main": "microTK.js",
+  "author": "Todd Henderson <todd@todd-henderson.me>",
+  "main": "dist/microTK.js",
   "scripts": {
     "build": "./node_modules/coffee-script/bin/cake build",
     "doc": "./node_modules/jsdox/bin/jsdox --templateDir templates dist/microTK.js; cp -f output/microTK.md README.md; rm -rf output/",

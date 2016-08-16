@@ -1,0 +1,35 @@
+{
+  "name": "microTK",
+  "description": "MicriTK is a tiny (>5k), minimalistic, and fast Javascript library for when every byte counts.",
+  "main": [
+    "dist/microTK.js", 
+    "dist/microTK.min.js", 
+    "dist/microTK.min.map"
+  ],
+  "authors": [
+    "Todd Henderson <todd@todd-henderson.me>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "DOM",
+    "tiny",
+    "light weight",
+    "class toggle"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/microTK/microTK.git"
+  },
+  "moduleType": [
+    "globals"
+  ],
+  "homepage": "http://microtk.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "templates"
+  ]
+}
