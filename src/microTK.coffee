@@ -30,6 +30,7 @@
  # 
  # @callback elementAction
  # @param {HTMLElement} element
+ # @param {int} [key] 
 ###
 
 ###*
@@ -62,7 +63,7 @@ class MicroTK
         ###*
          # @member string version - The current version.
         ### 
-        @.version = 'v0.0.3-pre'
+        @.version = 'v0.0.4-pre'
 
         if not selector
             return
@@ -111,8 +112,9 @@ class MicroTK
      # µ("#menu").addAttribute("title", "test");
     ###
     addAttribute: (name, value) ->
-        for _element in @
+        @.each (_element) ->
             _element.setAttribute name, value
+            return
         this
 
     ###*
@@ -125,8 +127,9 @@ class MicroTK
      # µ("#menu").addClass("active");
     ###
     addClass: (className) ->
-        for _element in @
-            _element?.classList?.add className
+        @.each (_element) ->
+            _element.classList.add className
+            return
         this
 
     ###*
@@ -141,27 +144,15 @@ class MicroTK
      #     µ(e).toggleClass("active");   
      # });
     ###
-    addEvent: (event, action) ->
-        _contains = (object,  value) ->
-            if object?
-                for item in object
-                    if item = value
-                        return true
-            return false
-            
-        for _element in @
-            if not _contains _element?._mtk?.actions, {event: event, action: action} 
-                if _element?.addEventListener? # Modern
-                    _element.addEventListener event, action, false
-                else if  _element?.attachEvent? # Internet Explorer
-                    _element.attachEvent "on" + event, action
-                else    # other
-                    _element["on" + event] = action
-
-                _element._mtk ?= {}
-                _element._mtk.actions ?= []
-                _element._mtk.actions.push 
-
+    addEvent: (event, action) ->  
+        @.each (_element) ->
+            if _element.addEventListener? # Modern
+                _element.addEventListener event, action, false
+            else if _element.attachEvent? # Internet Explorer
+                _element.attachEvent "on" + event, action
+            else    # other
+                _element["on" + event] = action
+            return
         this
 
     ###*
@@ -175,8 +166,9 @@ class MicroTK
      # µ("#menu").append(element); 
     ###
     append: (element) ->
-        for _element in @
-            _element?.appendChild element.cloneNode true
+        @.each (_element) ->
+            _element.appendChild element.cloneNode true
+            return
         this
     
     ###*
@@ -191,8 +183,8 @@ class MicroTK
      # });
     ###
     each: (action) ->
-        for _element in @
-            action _element
+        for _element, _key in @
+            action _element, _key
         this
 
     ###*
@@ -208,9 +200,10 @@ class MicroTK
      # });
     ###
     hasAttribute: (name, action) ->
-        for _element in @
+        @.each (_element) ->
             if _element.hasAttribute name
                 action _element
+            return
         this
 
     ###*
@@ -226,9 +219,10 @@ class MicroTK
      # });
     ###
     hasClass: (className, action) ->
-        for _element in @
-                if _element?.classList?.contains className
-                    action _element
+        @.each (_element) ->
+            if _element.classList.contains className
+                action _element
+            return
         this 
 
     ###*
@@ -242,11 +236,12 @@ class MicroTK
      # µ("#menu").prepend(element); 
     ###
     prepend: (element) ->
-        for _element in @ 
+        @.each (_element) ->
             if _element.firstChild?
                 _element.insertBefore element.cloneNode(true), _element.firstChild 
             else 
                 _element.appendChild element.cloneNode true
+            return
         this
 
     ###*
@@ -258,14 +253,14 @@ class MicroTK
      # µ("#menu").remove();
     ###
     remove: () ->
-        for _element, key in @
+        for _element, _key in @
             if _element.remove 
                 _element.remove();
-                delete @[key]
+                delete @[_key]
                 @.length--
             else 
                 _element.parentElement.removeChild(_element);
-                delete @[key]
+                delete @[_key]
                 @.length--
         this
 
@@ -279,8 +274,9 @@ class MicroTK
      # µ("#menu").removeAttribute("id");
     ###
     removeAttribute: (name) ->
-        for _element in @
+        @.each (_element) ->
             _element.removeAttribute name
+            return
         this
 
     ###*
@@ -293,9 +289,9 @@ class MicroTK
      # µ("#menu").removeClass("active");
     ###
     removeClass: (className) ->
-        for _element in @
-            _element?.classList?.remove className
-
+        @.each (_element) ->
+            _element.classList.remove className
+            return
         this
 
     ###*
@@ -308,8 +304,9 @@ class MicroTK
      # µ("#menu").toggleClass("active");
     ###
     toggleClass: (className) ->
-        for _element in @
-            _element?.classList?.toggle className
+        @.each (_element) ->
+            _element.classList.toggle className
+            return
         this
 
 root.MicroTK = MicroTK

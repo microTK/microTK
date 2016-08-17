@@ -33,6 +33,7 @@
   * 
   * @callback elementAction
   * @param {HTMLElement} element
+  * @param {int} [key]
  */
 
 
@@ -76,7 +77,7 @@
       /**
         * @member string version - The current version.
        */
-      this.version = 'v0.0.3-pre';
+      this.version = 'v0.0.4-pre';
       if (!selector) {
         return;
       }
@@ -138,11 +139,9 @@
      */
 
     MicroTK.prototype.addAttribute = function(name, value) {
-      var _element, i, len;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
+      this.each(function(_element) {
         _element.setAttribute(name, value);
-      }
+      });
       return this;
     };
 
@@ -158,15 +157,9 @@
      */
 
     MicroTK.prototype.addClass = function(className) {
-      var _element, i, len, ref;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        if (_element != null) {
-          if ((ref = _element.classList) != null) {
-            ref.add(className);
-          }
-        }
-      }
+      this.each(function(_element) {
+        _element.classList.add(className);
+      });
       return this;
     };
 
@@ -185,41 +178,15 @@
      */
 
     MicroTK.prototype.addEvent = function(event, action) {
-      var _contains, _element, base, i, len, ref;
-      _contains = function(object, value) {
-        var i, item, len;
-        if (object != null) {
-          for (i = 0, len = object.length; i < len; i++) {
-            item = object[i];
-            if (item = value) {
-              return true;
-            }
-          }
+      this.each(function(_element) {
+        if (_element.addEventListener != null) {
+          _element.addEventListener(event, action, false);
+        } else if (_element.attachEvent != null) {
+          _element.attachEvent("on" + event, action);
+        } else {
+          _element["on" + event] = action;
         }
-        return false;
-      };
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        if (!_contains(_element != null ? (ref = _element._mtk) != null ? ref.actions : void 0 : void 0, {
-          event: event,
-          action: action
-        })) {
-          if ((_element != null ? _element.addEventListener : void 0) != null) {
-            _element.addEventListener(event, action, false);
-          } else if ((_element != null ? _element.attachEvent : void 0) != null) {
-            _element.attachEvent("on" + event, action);
-          } else {
-            _element["on" + event] = action;
-          }
-          if (_element._mtk == null) {
-            _element._mtk = {};
-          }
-          if ((base = _element._mtk).actions == null) {
-            base.actions = [];
-          }
-          _element._mtk.actions.push;
-        }
-      }
+      });
       return this;
     };
 
@@ -236,13 +203,9 @@
      */
 
     MicroTK.prototype.append = function(element) {
-      var _element, i, len;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        if (_element != null) {
-          _element.appendChild(element.cloneNode(true));
-        }
-      }
+      this.each(function(_element) {
+        _element.appendChild(element.cloneNode(true));
+      });
       return this;
     };
 
@@ -260,10 +223,10 @@
      */
 
     MicroTK.prototype.each = function(action) {
-      var _element, i, len;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        action(_element);
+      var _element, _key, i, len;
+      for (_key = i = 0, len = this.length; i < len; _key = ++i) {
+        _element = this[_key];
+        action(_element, _key);
       }
       return this;
     };
@@ -283,13 +246,11 @@
      */
 
     MicroTK.prototype.hasAttribute = function(name, action) {
-      var _element, i, len;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
+      this.each(function(_element) {
         if (_element.hasAttribute(name)) {
           action(_element);
         }
-      }
+      });
       return this;
     };
 
@@ -308,13 +269,11 @@
      */
 
     MicroTK.prototype.hasClass = function(className, action) {
-      var _element, i, len, ref;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        if (_element != null ? (ref = _element.classList) != null ? ref.contains(className) : void 0 : void 0) {
+      this.each(function(_element) {
+        if (_element.classList.contains(className)) {
           action(_element);
         }
-      }
+      });
       return this;
     };
 
@@ -331,15 +290,13 @@
      */
 
     MicroTK.prototype.prepend = function(element) {
-      var _element, i, len;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
+      this.each(function(_element) {
         if (_element.firstChild != null) {
           _element.insertBefore(element.cloneNode(true), _element.firstChild);
         } else {
           _element.appendChild(element.cloneNode(true));
         }
-      }
+      });
       return this;
     };
 
@@ -354,16 +311,16 @@
      */
 
     MicroTK.prototype.remove = function() {
-      var _element, i, key, len;
-      for (key = i = 0, len = this.length; i < len; key = ++i) {
-        _element = this[key];
+      var _element, _key, i, len;
+      for (_key = i = 0, len = this.length; i < len; _key = ++i) {
+        _element = this[_key];
         if (_element.remove) {
           _element.remove();
-          delete this[key];
+          delete this[_key];
           this.length--;
         } else {
           _element.parentElement.removeChild(_element);
-          delete this[key];
+          delete this[_key];
           this.length--;
         }
       }
@@ -382,11 +339,9 @@
      */
 
     MicroTK.prototype.removeAttribute = function(name) {
-      var _element, i, len;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
+      this.each(function(_element) {
         _element.removeAttribute(name);
-      }
+      });
       return this;
     };
 
@@ -402,15 +357,9 @@
      */
 
     MicroTK.prototype.removeClass = function(className) {
-      var _element, i, len, ref;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        if (_element != null) {
-          if ((ref = _element.classList) != null) {
-            ref.remove(className);
-          }
-        }
-      }
+      this.each(function(_element) {
+        _element.classList.remove(className);
+      });
       return this;
     };
 
@@ -426,15 +375,9 @@
      */
 
     MicroTK.prototype.toggleClass = function(className) {
-      var _element, i, len, ref;
-      for (i = 0, len = this.length; i < len; i++) {
-        _element = this[i];
-        if (_element != null) {
-          if ((ref = _element.classList) != null) {
-            ref.toggle(className);
-          }
-        }
-      }
+      this.each(function(_element) {
+        _element.classList.toggle(className);
+      });
       return this;
     };
 

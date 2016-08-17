@@ -36,6 +36,7 @@ describe('remove()', function() {
         expect(sample.length).toEqual(control.length);
         
         var results = sample.remove();
+        
         expect(results.constructor.name).toEqual("MicroTK");
         expect(document.querySelectorAll('.classFixture').length).toEqual(sample.length);
     });
