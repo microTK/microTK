@@ -1,7 +1,7 @@
 # microTk
 A tiny JavaScript library for basic dom manipulation. 
 
-[![Build Status](https://drone.io/github.com/thenderson21/microTK/status.png)](https://drone.io/github.com/thenderson21/microTK/latest?91620161159)
+[![Build Status](https://drone.io/github.com/thenderson21/microTK/status.png)](https://drone.io/github.com/thenderson21/microTK/latest)
 
 # Usage
 
@@ -29,6 +29,11 @@ A tiny JavaScript library for basic dom manipulation.
 
 # Global
 
+
+
+
+
+
 ### microTK(selector, scope) 
 
 Creates a new instance of MicroTK with specified query paremeters or element(s)
@@ -49,14 +54,12 @@ var menu = µ("#menu");
 
 ## Class: MicroTK
 The main class of the microTK library, it is a list of selected HTMLElement 
-that various actions can be performed on.
+that various actions be performed on.
 
-### MicroTK.length
-`int`, The current number of selected elements.
-
-### MicroTK.version
-`string`, The current version. 
-
+**int**:  , The main class of the microTK library, it is a list of selected HTMLElement 
+that various actions be performed on.
+**string**:  , The main class of the microTK library, it is a list of selected HTMLElement 
+that various actions be performed on.
 ### MicroTK.addAttribute(name, value) 
 
 Adds an attribute to the selected elements.
@@ -251,6 +254,43 @@ Toggles a class in selected elements.
 µ("#menu").toggleClass("active");
 ```
 
+### microTK.extend(object, properties) 
+
+Extend a source object with the properties of another object (shallow copy).
+
+**Parameters**
+
+ - **object**: `object`, object to be extended.
+
+ - **properties**: `object`, object to donate properties.
+
+**Returns**: `object`, Origional object ectended with propertes of second object.
+
+**Example**:
+```js
+var options = µ.extend({}, { async: true });
+```
+
+### microTK.merge(object, overrides) 
+
+Merge objects, returning a fresh copy with attributes from both sides.
+
+**Parameters**
+
+ - **object**: `object`, object to be extended.
+
+ - **overrides**: `object`, extension object.
+
+**Returns**: `object`, A new object with combined attributes.
+
+**Example**:
+```js
+var options = µ.merge({}, { async: true });
+```
+
+
+
+
 # Author
 
  - Todd Henderson (thenderson21)
@@ -259,7 +299,7 @@ Toggles a class in selected elements.
 
 The MIT License
 
-Copyright (c) 2014-2016 Todd Henderson. http://microtk.io
+Copyright (c) 2014-2016 Todd Henderson, http://microTk.io
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

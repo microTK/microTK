@@ -1,5 +1,5 @@
 ###*
- # microTK - v0.0.3
+ # microTK - v0.1.0-pre
  #
  # @author Todd Henderson <todd@todd-henderson.me>
  # @license The MIT License (MIT)
@@ -63,7 +63,7 @@ class MicroTK
         ###*
          # @member string version - The current version.
         ### 
-        @.version = 'v0.0.4-pre'
+        @.version = 'v0.1.0-pre'
 
         if not selector
             return
@@ -312,3 +312,31 @@ class MicroTK
 root.MicroTK = MicroTK
 root.µ = root.microTK = (selector, scope) -> 
     new MicroTK(selector, scope)
+
+###*
+ # Extend a source object with the properties of another object (shallow copy).
+ #
+ # @param {object} object - object to be extended.
+ # @param {object} properties - object to donate properties.
+ # @returns {object} Origional object ectended with propertes of second object.
+ # @public
+ # @example
+ # var options = µ.extend({}, { async: true });
+###
+root.microTK.extend = (object, properties) ->
+    for key, val of properties
+        object[key] = val
+    object
+
+###*
+ # Merge objects, returning a fresh copy with attributes from both sides.
+ #
+ # @param {object} object - object to be extended.
+ # @param {object} overrides - extension object.
+ # @returns {object} A new object with combined attributes.
+ # @public
+ # @example
+ # var options = µ.merge({}, { async: true });
+###
+root.microTK.merge = (options, overrides) ->
+    root.microTK.extend (root.microTK.extend {}, options), overrides

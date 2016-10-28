@@ -1,19 +1,25 @@
 {
   "name": "microTK",
-  "version": "v0.0.4-pre",
-  "author": "Todd Henderson <todd@todd-henderson.me>",
+  "version": "v0.1.0-pre",
+  "author": {
+    "name": "Todd Henderson",
+    "email": "todd@todd-henderson.me",
+    "url": "http://todd-henderson.me"
+  },
   "main": "dist/microTK.js",
+  "license": "MIT",
+  "homepage": "http://microtk.io",
   "scripts": {
     "build": "./node_modules/coffee-script/bin/cake build",
     "doc": "./node_modules/jsdox/bin/jsdox --templateDir templates dist/microTK.js; cp -f output/microTK.md README.md; rm -rf output/",
-    "uglyify": "./node_modules/uglify-js/bin/uglifyjs dist/microTK.js -o dist/microTK.min.js --source-map dist/microTK.min.map -c --preamble '/**  microTK v0.0.4-pre @Copyright (c) Todd Henderson  @license MIT */'",
+    "uglyify": "./node_modules/uglify-js/bin/uglifyjs dist/microTK.js -o dist/microTK.min.js --source-map dist/microTK.min.map -c --preamble '/**  microTK v0.1.0-pre @Copyright (c) Todd Henderson  @license MIT */'",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "test-Local": "./node_modules/karma/bin/karma start karma.local.conf.js",
     "watch": "./node_modules/coffee-script/bin/cake watch"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:thenderson21/microTK.git"
+    "url": "git@github.com:microTK/microTK.git"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",
@@ -24,6 +30,7 @@
     "karma-chrome-launcher": "^1.0.1",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
-    "karma-phantomjs-launcher": "^1.0.1"
+    "karma-phantomjs-launcher": "^1.0.1",
+    "uglify-js": "^2.7.4"
   }
 }
